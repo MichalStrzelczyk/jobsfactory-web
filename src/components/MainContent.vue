@@ -1,0 +1,251 @@
+<template>
+  <div class="container" :class="isPanelHide ? 'headerMargin' : 'headerMarginBig'">
+    <div class="row">
+      <div class="col-3 align-items-center">
+        Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
+      </div>
+      <div class="col-9" >
+        <Tags :tags="selectedTags"></Tags>
+      </div>
+    </div>
+    <div class="col-lg-12 mt-4">
+      <div class="offerRow row mt-2 p-3" v-for="offer in offers" :key="offer.id">
+        <div class="col-2 companyImage">
+          <img v-bind:src="offer.companyLogoUrl" class=""/>
+        </div>
+        <div class="col-4">
+          <span class="position"><a href="#">{{ offer.position }}</a></span> <br/>
+          {{ offer.companyName }} <br/>
+          <span class="oi oi-location"></span><span class="city"> {{ offer.companyCity }}</span>
+        </div>
+        <div class="col-3">
+          <span class="money">{{ offer.minEarnings }} - {{ offer.maxEarnings }} PLN </span>
+        </div>
+        <div class="col-3">
+          <SmallTags :tagsMessage="offer.tags"></SmallTags>
+          <img class="sourcePortal" :src="'/assets/img/logo/' + offer.sourcePortal + '.jpg'" :alt="offer.sourcePortal"/>
+        </div>
+      </div>
+      <div class="row mt-2 p-3">
+        <div class="col text-xl-center" id="loader" v-bind:class="{ show: showLoader }">
+          <div class="spinner-grow text-warning m-2" role="status"></div>
+          <div class="spinner-grow text-warning m-2" role="status"></div>
+          <div class="spinner-grow text-warning m-2" role="status"></div>
+        </div>
+      </div>
+      <div class="row mt-2 mb-4 p-3">
+        <button class="btn btn-teal btn-more btn-marketing rounded-pill lift lift-sm" v-on:click="more">{{
+            activePage
+          }}/{{ pages }} Więcej ofert
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+</template>
+
+<script>
+import axios from 'axios'
+import Tags from '@/components/structural/Tags'
+import SmallTags from "@/components/structural/SmallTags";
+
+export default {
+  components: {
+    SmallTags,
+    Tags
+  },
+  data: function () {
+    return {
+      isPanelHide: false,
+      selectedTags: [],
+      offers: [],
+      showLoader: true,
+      perPage: 30,
+      activePage: 1,
+      pages: 0,
+      allOffersCount: 0,
+      searchRequirements: {
+        cityList: [],
+        contractTypes: [],
+        query: null,
+        seniorityList: [],
+        technologyList: [],
+      }
+    }
+  },
+  mounted() {
+    this.$root.$on('offersReload', this.reload);
+    this.$root.$on('searchPanelStatus', this.changeSearchPanelStatus);
+    this.reload([]);
+  },
+  methods: {
+    changeSearchPanelStatus: function(isHide){
+      this.isPanelHide = isHide;
+    },
+    more: function () {
+      this.activePage++;
+      this.getOffers();
+    },
+    reload: function (searchRequirements) {
+      this.offers = [];
+      this.activePage = 1;
+      this.selectedTags = [];
+      this.searchRequirements = searchRequirements;
+      this.getOffers();
+    },
+    getOffers: function () {
+      this.showLoader = true;
+      var limit = this.perPage;
+      var offset = this.perPage * (this.activePage - 1);
+      var url = 'http://api.jobsfactory.pl?limit=' + limit + '&offset=' + offset;
+
+      if (this.searchRequirements.onlyWithSalary) {
+        url += '&onlyWithSalary=1';
+        this.selectedTags.push('tylko z widełkami');
+      }
+
+      if (this.searchRequirements.additionalCity !== undefined && this.searchRequirements.additionalCity.length > 0) {
+        url += '&cities[]=' + this.searchRequirements.additionalCity;
+        this.selectedTags.push(this.searchRequirements.additionalCity);
+      }
+
+      if (this.searchRequirements.cityList !== undefined) {
+        this.searchRequirements.cityList.map((function (key) {
+          url += '&cities[]=' + key;
+          this.selectedTags.push(key);
+        }).bind(this));
+      }
+
+      if (this.searchRequirements.technologyList !== undefined) {
+        this.searchRequirements.technologyList.map((function (key) {
+          url += '&technologies[]=' + key;
+          this.selectedTags.push(key);
+        }).bind(this));
+      }
+
+      if (this.searchRequirements.contractTypes !== undefined) {
+        this.searchRequirements.contractTypes.map((function (key) {
+          url += '&contractTypes[]=' + key;
+          this.selectedTags.push(key);
+        }).bind(this));
+      }
+
+      if (this.searchRequirements.seniorityList !== undefined) {
+        this.searchRequirements.seniorityList.map((function (key) {
+          url += '&seniorityList[]=' + key;
+          this.selectedTags.push(key);
+        }).bind(this));
+      }
+
+      if (this.searchRequirements.query !== undefined && this.searchRequirements.query.length > 0) {
+        url += '&q=' + this.searchRequirements.query;
+        this.selectedTags.push(this.searchRequirements.query);
+      }
+
+      if (this.searchRequirements.minSalary !== undefined) {
+        url += '&salaryMin=' + this.searchRequirements.minSalary;
+        this.selectedTags.push('pensja >= ' + this.searchRequirements.minSalary);
+      }
+
+      var that = this;
+      axios
+          .get(url)
+          .then(function (response) {
+            that.offers = that.offers.concat(response.data.data);
+            that.allOffersCount = response.data.total;
+            that.pages = Math.ceil(response.data.total / that.perPage);
+            that.showLoader = false;
+          })
+          .catch(error => console.log(error))
+    }
+  },
+  name: 'MainContent',
+  props: {
+    msg: String
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped lang="scss">
+$red: #e81500 !default;
+$orange: #f76400 !default;
+$yellow: #f4a100 !default;
+$green: #00ac69 !default;
+$teal: #00ba94 !default;
+$cyan: #00cfd5 !default;
+$blue: #0061f2 !default;
+$indigo: #5800e8 !default;
+$purple: #6900c7 !default;
+$pink: #e30059 !default;
+
+#loader {
+  display: none
+}
+
+#loader.show {
+  display: block
+}
+
+.offerRow {
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
+  overflow: hidden;
+
+  .companyImage {
+    padding: 0 20px;
+    width: 150px;
+    height: 60px;
+    text-align: center;
+    align-self: center;
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+      vertical-align: middle;
+    }
+  }
+
+  .position a {
+    color: $pink;
+    font-weight: bold;
+  }
+
+  .position a:hover {
+    opacity: 0.7;
+
+  }
+
+  .city {
+    color: black;
+  }
+
+  .money {
+    font-size: 0.9rem;
+  }
+
+
+}
+
+.btn-more {
+  margin: 0 auto;
+}
+
+.headerMargin {
+  margin-top: 13rem;
+}
+.headerMarginBig {
+  margin-top: 30rem;
+}
+
+.sourcePortal {
+  max-width: 30%;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+</style>
