@@ -7,13 +7,14 @@
         <div class="row">
           <div class="col-lg-12 d-lg-block">
             <b-card no-body>
-              <b-tabs pills card vertical nav-wrapper-class="myPanelContainer" nav-class="myNavUl"
+              <b-tabs pills card vertical nav-wrapper-class="myPanelContainer col-12 col-md-auto" nav-class="myNavUl"
                       active-nav-item-class="myTabBtn"
                       id="tabPanel">
                 <b-tab title="Miasto" active>
                   <b-form-group label="">
                     <b-form-checkbox-group
                         id="checkbox-group-1"
+                        class="checkbox-group"
                         v-model="selectedCities"
                         :options="cityList"
                         name="flavour-1"
@@ -26,6 +27,7 @@
                   <b-form-group label="">
                     <b-form-checkbox-group
                         id="checkbox-group-4"
+                        class="checkbox-group"
                         v-model="selectedTechnology"
                         :options="technology"
                         name="flavour-4"
@@ -36,6 +38,7 @@
                   <b-form-group label="">
                     <b-form-checkbox-group
                         id="checkbox-group-2"
+                        class="checkbox-group"
                         v-model="selectedSeniority"
                         :options="seniority"
                         name="flavour-2"
@@ -46,6 +49,7 @@
                   <b-form-group label="">
                     <b-form-checkbox-group
                         id="checkbox-group-3"
+                        class="checkbox-group"
                         v-model="selectedContractType"
                         :options="contractType"
                         name="flavour-3"
@@ -75,7 +79,7 @@
                           v-model="selectedWord"/>
           </div>
           <div class="col-lg-4 d-lg-block">
-            <button class="btn btn-teal btn-marketing rounded-pill lift lift-sm btn-search" v-on:click="search">Znajdź
+            <button class="btn btn-teal btn-marketing rounded-pill lift lift-sm btn-search mt-3 mt-lg-0" v-on:click="search">Znajdź
               mi nową pracę
             </button>
           </div>
@@ -242,22 +246,49 @@ export default {
 
 <style lang="scss">
 
+@import "../styles/project-variables";
+
 $off-white: #e4dbff !default;
 $input-bg: rgba(0, 0, 0, 0.5);
 
-.myNavUl li {
-  width: 100%;
-  text-align: right;
-  font-weight: normal;
+.myNavUl {
+  li {
+    width: 100%;
+    text-align: right;
+    font-weight: normal;
+
+    a {
+      color: #aab1bb;
+
+      &:hover {
+        color: #e30059;
+      }
+    }
+  }
 }
 
-.myNavUl li a {
-  color: #aab1bb;
+
+@media (max-width: $breakpoint-lg) {
+  header {
+    padding-bottom: 1rem;
+    .myNavUl {
+      flex-direction: row !important;
+      justify-content: center;
+
+      li {
+        width: auto;
+        font-size: 0.8rem;
+      }
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+  }
 }
 
-.myNavUl li a:hover {
-  color: #e30059;
-}
 
 :focus {
   outline: none !important;
@@ -472,7 +503,8 @@ header {
 .minSalary {
   font-weight: bold;
 }
-@media (max-width: $breakpoint-md) {
+
+@media (max-width: $breakpoint-lg) {
   header {
     .navbar-marketing.bg-transparent.navbar-dark {
       background-color: transparent !important;
