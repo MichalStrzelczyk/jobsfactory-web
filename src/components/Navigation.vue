@@ -1,7 +1,7 @@
 <template>
   <nav class="navbar navbar-marketing navbar-expand-lg bg-transparent navbar-dark">
     <div class="container text-center">
-      <a class="navbar-brand text-white" href="/">JobsFactory.pl</a> Wszystkie ogłoszenia IT w jednym miejscu
+      <a class="navbar-brand text-white" href="/">JobsFactory.pl</a>
     </div>
   </nav>
 </template>

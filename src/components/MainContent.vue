@@ -1,11 +1,8 @@
 <template>
-  <div class="container" :class="isPanelHide ? 'headerMargin' : 'headerMarginBig'">
+  <div class="container-lg" :class="isPanelHide ? 'headerMargin' : 'headerMarginBig'">
     <div class="row">
       <div class="col-3 align-items-center">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
-      </div>
-      <div class="col-9" >
-        <Tags :tags="selectedTags"></Tags>
       </div>
     </div>
     <div class="col-lg-12 mt-4">
@@ -47,13 +44,11 @@
 
 <script>
 import axios from 'axios'
-import Tags from '@/components/structural/Tags'
 import SmallTags from "@/components/structural/SmallTags";
 
 export default {
   components: {
-    SmallTags,
-    Tags
+    SmallTags
   },
   data: function () {
     return {
