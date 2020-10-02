@@ -1,7 +1,7 @@
 <template>
   <div class="container-lg" :class="isPanelHide ? 'headerMargin' : 'headerMarginBig'">
-    <div class="row">
-      <div class="col-12">
+    <div class="row m-0">
+      <div class="col-12 p-0">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
       </div>
     </div>
@@ -243,11 +243,11 @@ $pink: #e30059 !default;
 }
 
 .headerMargin {
-  margin-top: 13rem;
+  margin-top: 10rem;
 }
 
 .headerMarginBig {
-  margin-top: 30rem;
+  margin-top: 22rem;
 }
 
 .sourcePortal {
@@ -263,7 +263,7 @@ $pink: #e30059 !default;
     padding: 0 1rem;
   }
   .headerMarginBig {
-    margin-top: 40rem;
+    margin-top: 32rem;
   }
 }
 </style>
