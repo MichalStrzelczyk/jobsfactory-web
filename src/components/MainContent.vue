@@ -1,30 +1,32 @@
 <template>
-  <div class="container" :class="isPanelHide ? 'headerMargin' : 'headerMarginBig'">
+  <div class="container-lg" :class="isPanelHide ? 'headerMargin' : 'headerMarginBig'">
     <div class="row">
-      <div class="col-3 align-items-center">
+      <div class="col-12">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
-      </div>
-      <div class="col-9" >
-        <Tags :tags="selectedTags"></Tags>
       </div>
     </div>
     <div class="col-lg-12 mt-4">
       <div class="offerRow row mt-2 p-3" v-for="offer in offers" :key="offer.id">
-        <div class="col-2 companyImage">
+        <div class="col-lg-2 col-3 companyImage">
           <img v-bind:src="offer.companyLogoUrl" class=""/>
         </div>
-        <div class="col-4">
-          <span class="position"><a href="#">{{ offer.position }}</a></span> <br/>
-          {{ offer.companyName }} <br/>
-          <span class="oi oi-location"></span><span class="city"> {{ offer.companyCity }}</span>
+        <div class="col-lg-10 col-9">
+          <div class="row">
+            <div class="col-lg-6 col-12">
+              <span class="position"><a href="#">{{ offer.position }}</a></span> <br/>
+              {{ offer.companyName }} <br/>
+              <span class="oi oi-location"></span><span class="city"> {{ offer.companyCity }}</span>
+            </div>
+            <div class="col-lg-3 col-12">
+              <span class="money">{{ offer.minEarnings }} - {{ offer.maxEarnings }} PLN </span>
+            </div>
+            <div class="col-lg-3 col-12">
+              <SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags>
+            </div>
+          </div>
         </div>
-        <div class="col-3">
-          <span class="money">{{ offer.minEarnings }} - {{ offer.maxEarnings }} PLN </span>
-        </div>
-        <div class="col-3">
-          <SmallTags :tagsMessage="offer.tags"></SmallTags>
-          <img class="sourcePortal" :src="'/assets/img/logo/' + offer.sourcePortal + '.jpg'" :alt="offer.sourcePortal"/>
-        </div>
+        <img class="sourcePortal" :src="'/assets/img/logo/' + offer.sourcePortal + '.jpg'"
+             :alt="offer.sourcePortal"/>
       </div>
       <div class="row mt-2 p-3">
         <div class="col text-xl-center" id="loader" v-bind:class="{ show: showLoader }">
@@ -47,13 +49,11 @@
 
 <script>
 import axios from 'axios'
-import Tags from '@/components/structural/Tags'
 import SmallTags from "@/components/structural/SmallTags";
 
 export default {
   components: {
-    SmallTags,
-    Tags
+    SmallTags
   },
   data: function () {
     return {
@@ -80,7 +80,7 @@ export default {
     this.reload([]);
   },
   methods: {
-    changeSearchPanelStatus: function(isHide){
+    changeSearchPanelStatus: function (isHide) {
       this.isPanelHide = isHide;
     },
     more: function () {
@@ -169,6 +169,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+
+@import "../styles/project-variables";
+
 $red: #e81500 !default;
 $orange: #f76400 !default;
 $yellow: #f4a100 !default;
@@ -190,7 +193,11 @@ $pink: #e30059 !default;
 
 .offerRow {
   box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
-  overflow: hidden;
+  position: relative;
+  //overflow: hidden;
+  .row {
+    align-items: center;
+  }
 
   .companyImage {
     padding: 0 20px;
@@ -238,6 +245,7 @@ $pink: #e30059 !default;
 .headerMargin {
   margin-top: 13rem;
 }
+
 .headerMarginBig {
   margin-top: 30rem;
 }
@@ -245,7 +253,17 @@ $pink: #e30059 !default;
 .sourcePortal {
   max-width: 30%;
   position: absolute;
-  bottom: 0;
-  right: 0;
+  bottom: 0.5rem;
+  right: 0.5rem;
+}
+
+
+@media (max-width: $breakpoint-lg) {
+  .container-lg {
+    padding: 0 1rem;
+  }
+  .headerMarginBig {
+    margin-top: 40rem;
+  }
 }
 </style>
