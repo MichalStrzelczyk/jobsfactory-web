@@ -1,19 +1,19 @@
 <template>
   <div class="row">
-    <ul class="bigTagList">
-      <li v-for="tag in tags" :key="tag">
-        <span class="tag">{{ tag }}</span>
-      </li>
-    </ul>
+    <div class="col-12">
+      <ul class="bigTagList">
+        <li v-for="tag in tags" :key="tag.value">
+          <span class="tag">{{ tag }}</span>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   data: function () {
-    return {
-
-    }
+    return {}
   },
   name: 'Tags',
   props: {
@@ -37,22 +37,22 @@ $indigo: #5800e8 !default;
 $purple: #6900c7 !default;
 $pink: #e30059 !default;
 
-  .bigTagList {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+.bigTagList {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 
-    li {
-      float: left;
-      margin: 0 0.1rem;
-    }
-
-    .tag {
-      float: left;
-      border: 1px solid $indigo;
-      color: $purple;
-      font-size: 1.2rem;
-      padding: 0.3rem 0.8rem;
-    }
+  li {
+    float: left;
+    margin: 0.4rem 0.1rem;
   }
+
+  .tag {
+    background-color: #e30059;
+    padding: 0.5rem 0.8rem;
+    border-radius: 30px;
+    color: white;
+    font-size: 0.9rem;
+  }
+}
 </style>

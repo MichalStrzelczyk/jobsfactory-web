@@ -32,11 +32,11 @@ export default {
 
     .tag {
       float: left;
-      border: 1px solid #000;
-      color: #000;
+      border: 1px solid #cccccc;
+      color: #5a5a5a;
       font-size: 0.9rem;
       margin: 0.25rem;
-      padding: 0.2rem 0.3rem;
+      padding: 0.2rem 0.5rem;
     }
   }
 </style>
