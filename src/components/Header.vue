@@ -19,8 +19,7 @@
                         :options="cityList"
                         name="flavour-1"
                     ></b-form-checkbox-group>
-                    <hr/>
-                    <b-form-input type="text" class="" placeholder="Wpisz brakujące miasto" v-model="additionalCity"/>
+                    <b-form-input type="text" class="mt-3" placeholder="Wpisz brakujące miasto" v-model="additionalCity"/>
                   </b-form-group>
                 </b-tab>
                 <b-tab title="Technologia">
@@ -63,8 +62,7 @@
                                   step="500"></b-form-input>
                     <div class="mt-2 minSalary">{{ minSalary }} PLN</div>
                   </div>
-                  <hr/>
-                  <b-form-checkbox v-model="onlyWithSalary" name="check-button" switch>
+                  <b-form-checkbox class="mt-3" v-model="onlyWithSalary" name="check-button" switch>
                     Tylko oferty z podaną stawką
                   </b-form-checkbox>
                 </b-tab>
@@ -73,7 +71,7 @@
           </div>
 
         </div>
-        <div class="row mt-4">
+        <div class="row mt-3">
           <div class="col-lg-8 d-lg-block">
             <b-form-input type="text" class="" placeholder="Słowo kluczowe np Kotlin, Phalcon, ..."
                           v-model="selectedWord"/>
@@ -88,7 +86,7 @@
     </div>
 
     <div>
-      <div class="svg-border-rounded text-white">
+      <div class="svg-border-rounded text-white d-none d-md-flex">
         <svg data-v-fa4f5a84="" xmlns="http://www.w3.org/2000/svg"
              viewBox="0 0 144.54 17.34" preserveAspectRatio="none"
              fill="currentColor">
@@ -98,9 +96,12 @@
       </div>
     </div>
     <div class="container">
-      <div class="row text-center">
-        <div class="col-12 mt-3">
+      <div class="row text-center align-items-end">
+        <div class="col-12 col-lg-10 tags">
           <Tags :tags="selectedTags"></Tags>
+        </div>
+        <div class="col-12 col-lg-2 d-none d-md-flex">
+          <a class="btnToggle" v-on:click="toggle">Dostosuj filtry</a>
         </div>
       </div>
     </div>
@@ -171,10 +172,13 @@ export default {
   created() {
     window.addEventListener('scroll', this.setIsScrolled);
   },
+  mounted() {
+    this.$root.$on('toggleHeader', this.toggle);
+  },
   methods: {
     toggle: function () {
-      this.hideSearchPanel = !this.hideSearchPanel;
-      this.$root.$emit('searchPanelStatus', this.hideSearchPanel);
+      this.isScrolled = false;
+      this.$root.$emit('searchPanelStatus', false);
     },
     search: function () {
       this.updateTags();
@@ -191,6 +195,7 @@ export default {
     },
     setIsScrolled() {
       this.isScrolled = window.scrollY > 50;
+      this.$root.$emit('searchPanelStatus', this.isScrolled);
     },
     updateTags() {
 
@@ -270,7 +275,6 @@ $input-bg: rgba(0, 0, 0, 0.5);
 
 @media (max-width: $breakpoint-lg) {
   header {
-    padding-bottom: 1rem;
     .myNavUl {
       flex-direction: row !important;
       justify-content: center;
@@ -303,20 +307,23 @@ $input-bg: rgba(0, 0, 0, 0.5);
 }
 
 .btnToggle {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  margin: 0 auto;
-  padding: 1rem;
-  color: #ffffff;
+  text-decoration: underline;
+  font-size: 0.9rem;
   cursor: pointer;
-}
-
-.btnToggle:hover {
-  color: #e30059;
+  color: white;
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.2s opacity;
+  &:hover {
+    color: white;
+  }
 }
 
 header {
+  padding-bottom: 1rem !important;
+  .tags {
+    margin-top: 0.5rem;
+  }
   .custom-control {
     .custom-control-label {
       &:before {
@@ -362,22 +369,33 @@ header {
     padding: 0.5rem;
   }
 
+  .card-body {
+    padding: 1rem;
+  }
+
+  .form-group {
+    margin-bottom: 0;
+  }
+
   .nav-pills {
     .nav-link {
       border: 1px solid transparent;
-      padding: 0.4rem 1rem;
-      margin: 0.1rem 0;
+      padding: 0.2rem 1rem;
+      font-size: 0.9rem;
+      //margin: 0.1rem 0;
 
       &:hover {
-        color: white;
-        background-color: rgba(255, 255, 255, 0.15);
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        //color: white;
+        //background-color: rgba(255, 255, 255, 0.15);
+        //border: 1px solid rgba(255, 255, 255, 0.3);
       }
 
       &.active {
-        border: 1px solid #ffffff;
-        font-weight: normal;
-        background-color: rgba(255, 255, 255, 0.15);
+        background: transparent;
+        color: #e30059;
+        //border: 1px solid #ffffff;
+        //font-weight: normal;
+        //background-color: rgba(255, 255, 255, 0.15);
       }
     }
   }
@@ -394,8 +412,11 @@ header {
     }
   }
 
-  hr {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  &.scrolled {
+    .btnToggle {
+      opacity: 1;
+      pointer-events: auto;
+    }
   }
 }
 
@@ -447,7 +468,10 @@ header {
   }
 
   &.scrolled {
-    padding-bottom: 2rem;
+
+    .tags {
+      margin-top: 0;
+    }
 
     .page-header-content {
       max-height: 0;
@@ -510,10 +534,13 @@ header {
       background-color: transparent !important;
       padding: 0 0.5rem;
     }
+    &.scrolled {
+      padding-bottom: 0.3rem !important;
+    }
   }
 
   .container {
-    padding: 0.5rem;
+    padding: 0 0.5rem;
   }
 }
 </style>
