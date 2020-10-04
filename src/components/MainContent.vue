@@ -8,7 +8,7 @@
     <div class="col-lg-12 mt-4">
       <div class="offerRow row mt-2 p-3" v-for="offer in offers" :key="offer.id">
         <div class="col-lg-2 col-3 companyImage">
-          <img v-bind:src="offer.companyLogoUrl" class=""/>
+          <ImagePreloader :imageUrl="offer.companyLogoUrl" :companyName="offer.companyName"></ImagePreloader>
         </div>
         <div class="col-lg-10 col-9">
           <div class="row">
@@ -50,10 +50,12 @@
 <script>
 import axios from 'axios'
 import SmallTags from "@/components/structural/SmallTags";
+import ImagePreloader from "@/components/structural/ImagePreloader";
 
 export default {
   components: {
-    SmallTags
+    SmallTags,
+    ImagePreloader
   },
   data: function () {
     return {
@@ -84,8 +86,10 @@ export default {
       this.isPanelHide = isHide;
     },
     more: function () {
-      this.activePage++;
-      this.getOffers();
+      if(this.activePage< this.pages){
+        this.activePage++;
+        this.getOffers();
+      }
     },
     reload: function (searchRequirements) {
       this.offers = [];

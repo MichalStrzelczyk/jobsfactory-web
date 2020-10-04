@@ -15,11 +15,6 @@
 
 <script>
 export default {
-  data: function () {
-    return {
-      "message": "Tasd ad asdas  dest"
-    }
-  },
   name: 'Navigation',
   methods: {
     toggle() {
