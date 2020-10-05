@@ -1,30 +1,28 @@
 <template>
-  <div id="app">
     <div id="layoutDefault">
       <div id="layoutDefault_content">
         <main>
-          <Header></Header>
-          <MainContent></MainContent>
+          <SimpleHeader></SimpleHeader>
         </main>
       </div>
       <div id="layoutDefault_footer">
         <Footer></Footer>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
-import Header from '@/components/Header.vue'
+import SimpleHeader from '@/components/SimpleHeader.vue'
 import Footer from '@/components/Footer.vue'
-import MainContent from "@/components/MainContent";
 
 export default {
-  name: 'App',
+  name: 'Offer',
   components: {
-    MainContent,
-    Header,
+    SimpleHeader,
     Footer
+  },
+  mounted() {
+    console.log(this.$route.params.id);
   }
 }
 </script>

@@ -13,7 +13,9 @@
         <div class="col-lg-10 col-9">
           <div class="row">
             <div class="col-lg-6 col-12">
-              <span class="position"><a href="#">{{ offer.position }}</a></span> <br/>
+              <span class="position">
+                <router-link :to="{ name: 'offer', params: { id: offer.id, city: offer.companyCity.toLowerCase(), seoText: createSlug(offer.position) }}">{{ offer.position }}</router-link>
+              </span> <br/>
               {{ offer.companyName }} <br/>
               <span class="oi oi-location"></span><span class="city"> {{ offer.companyCity }}</span>
             </div>
@@ -82,6 +84,27 @@ export default {
     this.reload([]);
   },
   methods: {
+    createSlug: function(str){
+        str = str.replace(/^\s+|\s+$/g, ""); // trim
+        str = str.toLowerCase();
+
+        // remove accents, swap ñ for n, etc
+        var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+        var to = "aaaaaaeeeeiiiioooouuuunc------";
+
+        for (var i = 0, l = from.length; i < l; i++) {
+          str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+        }
+
+        str = str
+            .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+            .replace(/\s+/g, "-") // collapse whitespace and replace by -
+            .replace(/-+/g, "-") // collapse dashes
+            .replace(/^-+/, "") // trim - from start of text
+            .replace(/-+$/, ""); // trim - from end of text
+
+        return str;
+    },
     changeSearchPanelStatus: function (isHide) {
       this.isPanelHide = isHide;
     },
