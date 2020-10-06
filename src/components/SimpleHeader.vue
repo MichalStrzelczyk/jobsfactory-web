@@ -29,54 +29,7 @@ export default {
   },
   data: function () {
     return {
-      hideSearchPanel: false,
-      selectedWord: '',
-      onlyWithSalary: false,
-      additionalCity: '',
-      minSalary: 0,
-      selectedCities: [],
-      selectedTags: [],
-      isScrolled: false,
-      cityList: [
-        {text: "Warszawa", value: "warszawa"},
-        {text: "Wrocałw", value: "wrocław"},
-        {text: "Kraków", value: "kraków"},
-        {text: "Gdańsk", value: "gdańsk"},
-        {text: "Poznań", value: "poznań"},
-        {text: "Katowice", value: "katowice"},
-        {text: "Gdynia", value: "gdynia"},
-        {text: "Lublin", value: "lublin"},
-      ],
-      selectedSeniority: [],
-      seniority: [
-        {text: "Praktyki", value: 'trainee'},
-        {text: "Junior", value: 'junior'},
-        {text: "Mid", value: 'middle'},
-        {text: "Senior", value: 'senior'},
-        {text: "Expert", value: 'expert'},
-      ],
-      selectedContractType: [],
-      contractType: [
-        {text: "B2B", value: 'b2b'},
-        {text: "Umowa o pracę", value: 'full_time'},
-        {text: "Umowa tymczasowa", value: 'temporary'},
-        {text: "Freelance", value: 'freelance'},
-      ],
-      selectedTechnology: [],
-      technology: [
-        {text: "Python", value: 'python'},
-        {text: "PHP", value: 'php'},
-        {text: ".net", value: '.net'},
-        {text: "Java", value: 'java'},
-        {text: "JavaScript", value: 'javascript'},
-        {text: "GO", value: 'go'},
-        {text: "C", value: 'c'},
-        {text: "C++", value: 'c++'},
-        {text: "C#", value: 'c#'},
-        {text: "Ruby", value: 'ruby'},
-        {text: "R", value: 'r'},
-        {text: "NodeJS", value: 'nodejs'}
-      ],
+      isScrolled: false
     }
   },
   created() {
@@ -90,66 +43,9 @@ export default {
       this.isScrolled = false;
       this.$root.$emit('searchPanelStatus', false);
     },
-    search: function () {
-      this.updateTags();
-      this.$root.$emit('offersReload', {
-        minSalary: this.minSalary,
-        onlyWithSalary: this.onlyWithSalary,
-        query: this.selectedWord,
-        cityList: this.selectedCities,
-        additionalCity: this.additionalCity,
-        seniorityList: this.selectedSeniority,
-        contractTypes: this.selectedContractType,
-        technologyList: this.selectedTechnology,
-      });
-    },
     setIsScrolled() {
       this.isScrolled = window.scrollY > 50;
       this.$root.$emit('searchPanelStatus', this.isScrolled);
-    },
-    updateTags() {
-
-      this.selectedTags = [];
-
-      if (this.onlyWithSalary) {
-        this.selectedTags.push('tylko z widełkami');
-      }
-
-      if (this.additionalCity !== undefined && this.additionalCity.length > 0) {
-        this.selectedTags.push(this.additionalCity);
-      }
-
-      if (this.selectedCities !== undefined) {
-        this.selectedCities.map((function (key) {
-          this.selectedTags.push(key);
-        }).bind(this));
-      }
-
-      if (this.selectedTechnology !== undefined) {
-        this.selectedTechnology.map((function (key) {
-          this.selectedTags.push(key);
-        }).bind(this));
-      }
-
-      if (this.selectedContractType !== undefined) {
-        this.selectedContractType.map((function (key) {
-          this.selectedTags.push(key);
-        }).bind(this));
-      }
-
-      if (this.selectedSeniority !== undefined) {
-        this.selectedSeniority.map((function (key) {
-          this.selectedTags.push(key);
-        }).bind(this));
-      }
-
-      if (this.query !== undefined && this.query.length > 0) {
-        this.selectedTags.push(this.query);
-      }
-
-      if (this.minSalary !== undefined && +this.minSalary > 0) {
-        this.selectedTags.push('pensja >= ' + this.minSalary);
-      }
     }
   },
   name: 'SimpleHeader',
