@@ -1,5 +1,5 @@
 <template>
-  <div class="container-lg" :class="isPanelHide ? 'headerMargin' : 'headerMarginBig'">
+  <div class="container-lg mt-10">
     <div class="row m-0">
       <div class="col-12 p-0">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
@@ -14,7 +14,7 @@
           <div class="row">
             <div class="col-lg-6 col-12">
               <span class="position">
-                <router-link :to="{ name: 'offer', params: { id: offer.id, city: offer.companyCity.toLowerCase(), seoText: createSlug(offer.position) }}">{{ offer.position }}</router-link>
+                <router-link :to="{ name: 'offer', params: { id: offer.id, city: offer.companyCity, seoText: createSlug(offer.position) }}">{{ offer.position }}</router-link>
               </span> <br/>
               {{ offer.companyName }} <br/>
               <span class="oi oi-location"></span><span class="city"> {{ offer.companyCity }}</span>
@@ -27,8 +27,6 @@
             </div>
           </div>
         </div>
-        <img class="sourcePortal" :src="'/assets/img/logo/' + offer.sourcePortal + '.jpg'"
-             :alt="offer.sourcePortal"/>
       </div>
       <div class="row mt-2 p-3">
         <div class="col text-xl-center" id="loader" v-bind:class="{ show: showLoader }">

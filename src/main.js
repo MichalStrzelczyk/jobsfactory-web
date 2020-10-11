@@ -15,8 +15,8 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: '/',
-        name: 'searcher',
-        component: () => import('./components/views/page/searcher.vue'),
+        name: 'home',
+        component: () => import('./components/views/page/home.vue'),
     },
     {
         path: '/oferta-pracy,:id-:city-:seoText',
