@@ -6,12 +6,12 @@
       </div>
     </div>
     <div class="row">
-      <div id="leftPanel" class="col-6">
-          <div class="row mt-15">
+      <div id="leftPanel" class="col-12 col-md-5 col-lg-4">
+          <div class="row mt-10">
             <Searcher></Searcher>
           </div>
       </div>
-      <div id="rightPanel" class="col-6">
+      <div id="rightPanel" class="col-12 col-md-7 col-lg-8">
         <MainContent></MainContent>
       </div>
     </div>

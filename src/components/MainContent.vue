@@ -1,5 +1,5 @@
 <template>
-  <div class="container-lg mt-10">
+  <div class="mt-10">
     <div class="row m-0">
       <div class="col-12 p-0">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
