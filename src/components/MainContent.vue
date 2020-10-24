@@ -20,7 +20,7 @@
               <span class="oi oi-location"></span><span class="city"> {{ offer.companyCity }}</span>
             </div>
             <div class="col-lg-3 col-12">
-              <span class="money">{{ offer.minEarnings }} - {{ offer.maxEarnings }} PLN </span>
+              <span class="money">{{ offer.minEarnings }} - {{ offer.maxEarnings }} {{ offer.currency }} </span>
             </div>
             <div class="col-lg-3 col-12">
               <SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags>
@@ -73,6 +73,7 @@ export default {
         query: null,
         seniorityList: [],
         technologyList: [],
+        categoryList: [],
       }
     }
   },
@@ -127,17 +128,19 @@ export default {
 
       if (this.searchRequirements.onlyWithSalary) {
         url += '&onlyWithSalary=1';
-        this.selectedTags.push('tylko z widełkami');
-      }
-
-      if (this.searchRequirements.additionalCity !== undefined && this.searchRequirements.additionalCity.length > 0) {
-        url += '&cities[]=' + this.searchRequirements.additionalCity;
-        this.selectedTags.push(this.searchRequirements.additionalCity);
+        this.selectedTags.push('tylko z widełkami cenowymi');
       }
 
       if (this.searchRequirements.cityList !== undefined) {
         this.searchRequirements.cityList.map((function (key) {
           url += '&cities[]=' + key;
+          this.selectedTags.push(key);
+        }).bind(this));
+      }
+
+      if (this.searchRequirements.categoryList !== undefined) {
+        this.searchRequirements.categoryList.map((function (key) {
+          url += '&category[]=' + key;
           this.selectedTags.push(key);
         }).bind(this));
       }
