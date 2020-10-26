@@ -142,7 +142,6 @@ export default {
         {text: "Ruby", value: 'ruby'},
         {text: ".net", value: '.net'},
         {text: "GO", value: 'go'},
-        {text: "Devops", value: 'devops'},
         {text: "BigData", value: 'big_data'},
         {text: "C", value: 'c'},
         {text: "C++", value: 'c++'},

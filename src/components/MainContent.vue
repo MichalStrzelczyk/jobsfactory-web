@@ -3,6 +3,20 @@
     <div class="row m-0">
       <div class="col-12 p-0">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
+
+        <ul class="sorting">
+          <li>
+            <a v-on:click.prevent.stop="changeOrder('id_desc')" v-bind:class="{'active' : searchRequirements.orderType == 'id_desc'}" href="">Najnowsze</a>
+          </li>
+          <li>
+            <a v-on:click.prevent.stop="changeOrder('id_asc')" v-bind:class="{'active' : searchRequirements.orderType == 'id_asc'}" href="">Najstarsze </a>
+          </li>
+          <li>
+            <a v-on:click.prevent.stop="changeOrder('maxEarnings_desc')" v-bind:class="{'active' : searchRequirements.orderType == 'maxEarnings_desc'}" href="">Najlepiej płatne</a>
+          </li>
+        </ul>
+
+
       </div>
     </div>
     <div class="col-lg-12 mt-4">
@@ -74,7 +88,9 @@ export default {
         seniorityList: [],
         technologyList: [],
         categoryList: [],
-      }
+        orderType: "id_desc"
+      },
+
     }
   },
   mounted() {
@@ -83,6 +99,10 @@ export default {
     this.reload([]);
   },
   methods: {
+    changeOrder: function(orderType){
+      this.searchRequirements.orderType = orderType;
+      this.reload(this.searchRequirements);
+    },
     createSlug: function(str){
         str = str.replace(/^\s+|\s+$/g, ""); // trim
         str = str.toLowerCase();
@@ -140,7 +160,7 @@ export default {
 
       if (this.searchRequirements.categoryList !== undefined) {
         this.searchRequirements.categoryList.map((function (key) {
-          url += '&category[]=' + key;
+          url += '&categories[]=' + key;
           this.selectedTags.push(key);
         }).bind(this));
       }
@@ -174,6 +194,12 @@ export default {
       if (this.searchRequirements.minSalary !== undefined) {
         url += '&salaryMin=' + this.searchRequirements.minSalary;
         this.selectedTags.push('pensja >= ' + this.searchRequirements.minSalary);
+      }
+
+      switch (this.searchRequirements.orderType){
+        case 'id_desc': url += '&orderBy=id&orderType=DESC'; break;
+        case 'id_asc': url += '&orderBy=id&orderType=ASC'; break;
+        case 'maxEarnings_desc': url += '&orderBy=maxEarnings&orderType=DESC'; break;
       }
 
       var that = this;
@@ -210,6 +236,7 @@ $blue: #0061f2 !default;
 $indigo: #5800e8 !default;
 $purple: #6900c7 !default;
 $pink: #e30059 !default;
+$grey: #687281 !default;
 
 #loader {
   display: none
@@ -283,6 +310,23 @@ $pink: #e30059 !default;
   position: absolute;
   bottom: 0.5rem;
   right: 0.5rem;
+}
+
+ul.sorting {
+  list-style: none;
+  float: right;
+  li {
+    text-align: center;
+    float: left;
+    padding: 0 .4rem;
+    a {
+      color: $grey;
+    }
+
+    a.active {
+      color: $pink;
+    }
+  }
 }
 
 
