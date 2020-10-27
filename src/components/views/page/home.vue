@@ -1,15 +1,13 @@
 <template>
   <div class="container-fluid">
-    <div class="row fixed-top bg-jobsfactory">
-      <div class="logo">
-        <a href="/" title="Portal z ogłoszeniami pracy dla IT">JobsFactory.pl</a>
-      </div>
+    <div id="searcher" class="fixed-top col-12 col-md-5 col-lg-4">
+      <Searcher></Searcher>
     </div>
+
+
     <div class="row">
       <div id="leftPanel" class="col-12 col-md-5 col-lg-4">
-          <div class="row mt-10">
-            <Searcher></Searcher>
-          </div>
+
       </div>
       <div id="rightPanel" class="col-12 col-md-7 col-lg-8">
         <MainContent></MainContent>
@@ -33,31 +31,28 @@ export default {
 </script>
 
 <style lang="scss">
- #leftPanel {
-   min-height: 100%;
 
-   .fixed-top {
-     max-width: 50%;
-   }
- }
+#searcher {
+  top: 2rem;
+}
+
+#leftPanel {
+
+  min-height: 100%;
+
+  .fixed-top {
+    max-width: 50%;
+  }
+}
 
 
- .bg-jobsfactory {
-   background-image: linear-gradient(15deg, #311840 10%,rgba(105,0,199,.8) 80%);
- }
- .logo {
-   a {
-     margin-left: 2rem;
-     display: block;
-     color: white;
-     font-weight: bold;
-     font-size: 1.5rem;
-     padding: 1rem;
-   }
-   a:hover {
-     text-decoration: none;
-   }
+.bg-jobsfactory-header {
+  background: rgba(6, 4, 8, 0.95);
 
- }
+}
+
+.bg-jobsfactory {
+  background-image: linear-gradient(15deg, #311840 10%, rgba(105, 0, 199, .8) 80%);
+}
 
 </style>

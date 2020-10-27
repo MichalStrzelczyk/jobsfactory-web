@@ -1,5 +1,5 @@
 <template>
-  <div class="mt-10">
+  <div class="mt-5">
     <div class="row m-0">
       <div class="col-12 p-0">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
@@ -49,7 +49,7 @@
           <div class="spinner-grow text-warning m-2" role="status"></div>
         </div>
       </div>
-      <div class="row mt-2 mb-4 p-3">
+      <div v-if="pages>0" class="row mt-2 mb-4 p-3">
         <button class="btn btn-teal btn-more btn-marketing rounded-pill lift lift-sm" v-on:click="more">{{
             activePage
           }}/{{ pages }} Więcej ofert
@@ -88,7 +88,7 @@ export default {
         seniorityList: [],
         technologyList: [],
         categoryList: [],
-        orderType: "id_desc"
+        orderType: 'id_desc'
       },
 
     }

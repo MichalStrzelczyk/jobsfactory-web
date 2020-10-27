@@ -1,12 +1,21 @@
 <template>
   <div id="mainSearcher" v-bind:class="{'pink' : pinkLabels}">
     <div class="page-header-content">
+
+
+
       <div id="searchPanel">
         <div class="row">
           <div class="col-lg-12 d-lg-block">
 
-            <div class="card">
+            <div class="card bg-jobsfactory">
               <div class="card-body">
+
+
+                <div class="logo">
+                  <a href="/" title="Portal z ogłoszeniami pracy dla IT">JobsFactory.pl</a>
+                </div>
+
                 <!-- <b-tab title="Technologia">-->
                 <h4 class="mt-0">Technologia</h4>
                 <b-form-group label="">
@@ -68,14 +77,18 @@
 
                 <!-- <b-tab title="Wynagrodzenie">-->
                 <h4>Wynagrodzenie</h4>
-                <div>
-                  <label for="range-1">Zarobki nie mniejsze niż</label>
-                  <b-form-input id="range-1" v-model="minSalary" type="range" min="0" max="26000"
-                                step="500"></b-form-input>
-                  <div class="mt-2 minSalary">{{ minSalary }} PLN</div>
+                <div class="row">
+                  <div class="col-8">
+                    <b-form-input id="range-1" v-model="minSalary" type="range" min="0" max="26000"
+                                  step="500"></b-form-input>
+                  </div>
+                  <div class="col-4">
+                    <div class="minSalary">{{ minSalary }} PLN</div>
+                  </div>
                 </div>
-                <b-form-checkbox class="mt-3" v-model="onlyWithSalary" name="check-button" switch>
-                  Tylko oferty z podaną stawką
+
+                <b-form-checkbox class="mb-3" v-model="onlyWithSalary" name="check-button" switch>
+                  <span class="offersOnlyWithMoney">Tylko oferty z podaną stawką</span>
                 </b-form-checkbox>
 
 
@@ -232,6 +245,21 @@ export default {
 
 @import "../styles/project-variables";
 
+.logo {
+  a {
+    display: block;
+    color: white;
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  a:hover {
+    text-decoration: none;
+  }
+
+}
+
 .myNavUl {
   li {
     width: 100%;
@@ -256,12 +284,7 @@ export default {
   width: 100%
 }
 
-h4 {
-  font-size: 1rem;
-  margin: 1.8rem 0 1rem 0;
-  border-bottom: 1px solid black;
-
-}
+#searchPanel{}
 
 .custom-checkbox {
   padding: 0;
@@ -270,11 +293,12 @@ h4 {
 
   .custom-control-label {
     cursor: pointer;
-    margin: 0.25rem 0;
+    margin: 0.2rem 0;
     border: 1px solid darkgray;
-    padding: 0.2rem 0.5rem 0 0.5rem;
-    font-size: 0.9rem;
+    padding: 0.15rem 0.4rem 0 0.5rem;
+    font-size: 0.88rem;
     transition: 0.2s background-color, border-color;
+    color: #fff;
 
     &:hover {
       background-color: rgba(227, 0, 89, 0.3);
@@ -303,9 +327,19 @@ h4 {
 
 .pink {
   h4 {
-    margin: 1.8rem 0 0.4rem 0;
+    font-size: 0.9rem;
     color: #e30059;
     border: none;
   }
+}
+
+.minSalary {
+  color: white;
+  font-weight: bold;
+}
+
+.offersOnlyWithMoney {
+  color: white;
+  font-size: 0.8rem;
 }
 </style>
