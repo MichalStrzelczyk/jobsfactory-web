@@ -17,7 +17,7 @@
                 </div>
 
                 <!-- <b-tab title="Technologia">-->
-                <h4 class="mt-0">Technologia</h4>
+                <h4 class="mt-5">Technologia</h4>
                 <b-form-group label="">
                   <b-form-checkbox-group
                       id="checkbox-group-4"
@@ -250,8 +250,16 @@ export default {
     display: block;
     color: white;
     font-weight: bold;
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+    background: rgba(0,0,0,0.7);
+    padding: 0.8rem 1.5rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    width: 100%;
   }
 
   a:hover {
@@ -295,8 +303,8 @@ export default {
     cursor: pointer;
     margin: 0.2rem 0;
     border: 1px solid darkgray;
-    padding: 0.15rem 0.4rem 0 0.5rem;
-    font-size: 0.88rem;
+    padding: 0.15rem 0.3rem 0 0.5rem;
+    font-size: 0.8rem;
     transition: 0.2s background-color, border-color;
     color: #fff;
 
@@ -327,7 +335,7 @@ export default {
 
 .pink {
   h4 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #e30059;
     border: none;
   }
@@ -335,11 +343,14 @@ export default {
 
 .minSalary {
   color: white;
-  font-weight: bold;
 }
 
 .offersOnlyWithMoney {
   color: white;
+  font-size: 0.8rem;
+}
+
+.form-control {
   font-size: 0.8rem;
 }
 </style>

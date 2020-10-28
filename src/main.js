@@ -1,16 +1,17 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router';
 import App from './app.vue'
-//import router from './router';
+import VueMeta from 'vue-meta'
 
-import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+
+import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
 import './styles/styles.scss';
 
 Vue.config.productionTip = false
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
-
+Vue.use(VueMeta)
 Vue.use(VueRouter);
 const routes = [
     {
@@ -29,6 +30,6 @@ const router = new VueRouter({
 })
 
 new Vue({
-  router,
-  render: h => h(App),
+    router,
+    render: h => h(App),
 }).$mount('#app')
