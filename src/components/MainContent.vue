@@ -20,13 +20,13 @@
       </div>
     </div>
     <div class="col-lg-12 mt-4">
-      <div class="offerRow row mt-2 p-3" v-for="offer in offers" :key="offer.id">
+      <div class="offerRow row mt-3 p-2" v-for="offer in offers" :key="offer.id">
         <div class="col-lg-2 col-3 companyImage">
           <ImagePreloader :imageUrl="offer.companyLogoUrl" :companyName="offer.companyName"></ImagePreloader>
         </div>
         <div class="col-lg-10 col-9">
           <div class="row">
-            <div class="col-lg-6 col-12">
+            <div class="col-lg-4 col-12">
               <span class="position">
                 <router-link target="_blank" @click="navigate" :to="{ name: 'offer', params: { id: offer.id, city: offer.companyCity, seoText: createSlug(offer.position) }}">{{ offer.position }}</router-link>
               </span> <br/>
@@ -36,7 +36,7 @@
             <div class="col-lg-3 col-12">
               <span class="money">{{ offer.minEarnings }} - {{ offer.maxEarnings }} {{ offer.currency }} </span>
             </div>
-            <div class="col-lg-3 col-12">
+            <div class="col-lg-5 col-12">
               <SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags>
             </div>
           </div>
@@ -82,6 +82,7 @@ export default {
       pages: 0,
       allOffersCount: 0,
       searchRequirements: {
+        onlyFromPl: true,
         cityList: [],
         contractTypes: [],
         query: null,
@@ -148,7 +149,10 @@ export default {
 
       if (this.searchRequirements.onlyWithSalary) {
         url += '&onlyWithSalary=1';
-        this.selectedTags.push('tylko z widełkami cenowymi');
+      }
+
+      if (this.searchRequirements.onlyFromPl || this.searchRequirements.cityList === undefined) {
+        url += '&country=PL';
       }
 
       if (this.searchRequirements.cityList !== undefined) {
@@ -247,7 +251,7 @@ $grey: #687281 !default;
 }
 
 .offerRow {
-  box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.15);
+  box-shadow: 0 0.15rem 1.75rem 0 rgba(31, 45, 65, 0.1);
   position: relative;
   //overflow: hidden;
   .row {
@@ -287,6 +291,7 @@ $grey: #687281 !default;
   }
 
   .money {
+    color: black;
     font-size: 0.9rem;
   }
 

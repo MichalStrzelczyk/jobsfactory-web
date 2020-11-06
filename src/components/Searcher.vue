@@ -49,6 +49,9 @@
                       :options="cityList"
                       name="flavour-1"
                   ></b-form-checkbox-group>
+                  <b-form-checkbox class="mb-3" v-model="onlyFromPl" name="check-button" switch>
+                    <span class="offersOnlyWithMoney">Tylko oferty z Polski</span>
+                  </b-form-checkbox>
                 </b-form-group>
 
                 <!-- <b-tab title="Doświadczenie">-->
@@ -114,6 +117,7 @@ export default {
       pinkLabels: true,
       selectedWord: '',
       onlyWithSalary: false,
+      onlyFromPl: true,
       minSalary: undefined,
       selectedCities: [],
       cityList: [
@@ -206,6 +210,9 @@ export default {
     onlyWithSalary: function (){
       this.search();
     },
+    onlyFromPl: function (){
+      this.search();
+    },
     selectedWord: function (){
       this.search();
     },
@@ -225,6 +232,7 @@ export default {
       this.$root.$emit('offersReload', {
         minSalary: this.minSalary,
         onlyWithSalary: this.onlyWithSalary,
+        onlyFromPl: this.onlyFromPl,
         query: this.selectedWord,
         cityList: this.selectedCities,
         seniorityList: this.selectedSeniority,

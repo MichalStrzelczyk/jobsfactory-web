@@ -34,7 +34,7 @@ export default {
       float: left;
       border: 1px solid #cccccc;
       color: #5a5a5a;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       margin: 0.25rem;
       padding: 0.2rem 0.5rem;
     }
