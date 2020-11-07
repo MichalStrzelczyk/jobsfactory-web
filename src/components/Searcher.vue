@@ -1,109 +1,101 @@
 <template>
-  <div id="mainSearcher" v-bind:class="{'pink' : pinkLabels}">
-    <div class="page-header-content">
+  <div id="searchPanel" class="pink bg-jobsfactory">
+    <div class="row">
+      <div class="col-lg-12 d-lg-block">
+        <div class="card-body">
+          <div class="logo">
+            <a href="/" title="Portal z ogłoszeniami pracy dla IT">
+              <img src="/assets/img/logo/jobs_factory_white.svg"/>
+            </a>
+          </div>
+          <hr />
 
+          <!-- <b-tab title="Technologia">-->
+          <h4 class="mt-3">Technologia</h4>
+          <b-form-group label="">
+            <b-form-checkbox-group
+                id="checkbox-group-4"
+                class="checkbox-group"
+                v-model="selectedTechnology"
+                :options="technology"
+                name="flavour-4"
+            ></b-form-checkbox-group>
+          </b-form-group>
 
+          <h4 class="mt-0">Kategoria</h4>
+          <b-form-group label="">
+            <b-form-checkbox-group
+                id="checkbox-group-5"
+                class="checkbox-group"
+                v-model="selectedCategory"
+                :options="category"
+                name="flavour-5"
+            ></b-form-checkbox-group>
+          </b-form-group>
 
-      <div id="searchPanel">
-        <div class="row">
-          <div class="col-lg-12 d-lg-block">
+          <!--   <b-tab title="Miasto" active>-->
+          <h4>Miasto</h4>
+          <b-form-group label="">
+            <b-form-checkbox-group
+                id="checkbox-group-1"
+                class="checkbox-group"
+                v-model="selectedCities"
+                :options="cityList"
+                name="flavour-1"
+            ></b-form-checkbox-group>
+            <b-form-checkbox class="mb-3" v-model="onlyFromPl" name="check-button" switch>
+              <span class="offersOnlyWithMoney">Tylko oferty z Polski</span>
+            </b-form-checkbox>
+          </b-form-group>
 
-            <div class="card bg-jobsfactory">
-              <div class="card-body">
+          <!-- <b-tab title="Doświadczenie">-->
+          <h4>Doświadczenie</h4>
+          <b-form-group label="">
+            <b-form-checkbox-group
+                id="checkbox-group-2"
+                class="checkbox-group"
+                v-model="selectedSeniority"
+                :options="seniority"
+                name="flavour-2"
+            ></b-form-checkbox-group>
+          </b-form-group>
 
+          <!--<b-tab title="Rodzaj umowy">-->
+          <h4>Rodzaj umowy</h4>
+          <b-form-group label="">
+            <b-form-checkbox-group
+                id="checkbox-group-3"
+                class="checkbox-group"
+                v-model="selectedContractType"
+                :options="contractType"
+                name="flavour-3"
+            ></b-form-checkbox-group>
+          </b-form-group>
 
-                <div class="logo">
-                  <a href="/" title="Portal z ogłoszeniami pracy dla IT">JobsFactory.pl</a>
-                </div>
-
-                <!-- <b-tab title="Technologia">-->
-                <h4 class="mt-5">Technologia</h4>
-                <b-form-group label="">
-                  <b-form-checkbox-group
-                      id="checkbox-group-4"
-                      class="checkbox-group"
-                      v-model="selectedTechnology"
-                      :options="technology"
-                      name="flavour-4"
-                  ></b-form-checkbox-group>
-                </b-form-group>
-
-                <h4 class="mt-0">Kategoria</h4>
-                <b-form-group label="">
-                  <b-form-checkbox-group
-                      id="checkbox-group-5"
-                      class="checkbox-group"
-                      v-model="selectedCategory"
-                      :options="category"
-                      name="flavour-5"
-                  ></b-form-checkbox-group>
-                </b-form-group>
-
-                <!--   <b-tab title="Miasto" active>-->
-                <h4>Miasto</h4>
-                <b-form-group label="">
-                  <b-form-checkbox-group
-                      id="checkbox-group-1"
-                      class="checkbox-group"
-                      v-model="selectedCities"
-                      :options="cityList"
-                      name="flavour-1"
-                  ></b-form-checkbox-group>
-                  <b-form-checkbox class="mb-3" v-model="onlyFromPl" name="check-button" switch>
-                    <span class="offersOnlyWithMoney">Tylko oferty z Polski</span>
-                  </b-form-checkbox>
-                </b-form-group>
-
-                <!-- <b-tab title="Doświadczenie">-->
-                <h4>Doświadczenie</h4>
-                <b-form-group label="">
-                  <b-form-checkbox-group
-                      id="checkbox-group-2"
-                      class="checkbox-group"
-                      v-model="selectedSeniority"
-                      :options="seniority"
-                      name="flavour-2"
-                  ></b-form-checkbox-group>
-                </b-form-group>
-
-                <!--<b-tab title="Rodzaj umowy">-->
-                <h4>Rodzaj umowy</h4>
-                <b-form-group label="">
-                  <b-form-checkbox-group
-                      id="checkbox-group-3"
-                      class="checkbox-group"
-                      v-model="selectedContractType"
-                      :options="contractType"
-                      name="flavour-3"
-                  ></b-form-checkbox-group>
-                </b-form-group>
-
-                <!-- <b-tab title="Wynagrodzenie">-->
-                <h4>Wynagrodzenie</h4>
-                <div class="row">
-                  <div class="col-8">
-                    <b-form-input id="range-1" v-model="minSalary" type="range" min="0" max="26000"
-                                  step="500"></b-form-input>
-                  </div>
-                  <div class="col-4">
-                    <div class="minSalary">{{ minSalary }} PLN</div>
-                  </div>
-                </div>
-
-                <b-form-checkbox class="mb-3" v-model="onlyWithSalary" name="check-button" switch>
-                  <span class="offersOnlyWithMoney">Tylko oferty z podaną stawką</span>
-                </b-form-checkbox>
-
-
-                <h4>Słowo kluczowe</h4>
-                <b-form-input type="text" class="" placeholder="np nazwa frameworka, technologii, firmy"
-                              v-model="selectedWord"/>
-              </div>
+          <!-- <b-tab title="Wynagrodzenie">-->
+          <h4>Wynagrodzenie</h4>
+          <div class="row">
+            <div class="col-8">
+              <b-form-input id="range-1" v-model="minSalary" type="range" min="0" max="26000"
+                            step="500"></b-form-input>
+            </div>
+            <div class="col-4">
+              <div class="minSalary">{{ minSalary }} PLN</div>
             </div>
           </div>
+
+          <b-form-checkbox class="mb-3" v-model="onlyWithSalary" name="check-button" switch>
+            <span class="offersOnlyWithMoney">Tylko oferty z podaną stawką</span>
+          </b-form-checkbox>
+
+
+          <h4>Słowo kluczowe</h4>
+          <b-form-input type="text" class="" placeholder="np nazwa frameworka, technologii, firmy"
+                        v-model="selectedWord"/>
         </div>
-
-
+      </div>
+      <div id="footerLinks" class="p-3">
+        Copyright JobsFactory.pl 2020 | <a target="_blank" href="/assets/pdf/regulamin.pdf">Regulamin</a> | <a target="_blank" href="/assets/pdf/polityka_prywatnosci.pdf">Polity prywatności</a>
       </div>
     </div>
   </div>
@@ -123,7 +115,7 @@ export default {
       cityList: [
         {text: "Praca zdalna", value: "remote"},
         {text: "Warszawa", value: "warszawa"},
-        {text: "Wrocałw", value: "wrocław"},
+        {text: "Wrocław", value: "wrocław"},
         {text: "Kraków", value: "kraków"},
         {text: "Gdańsk", value: "gdańsk"},
         {text: "Poznań", value: "poznań"},
@@ -189,31 +181,31 @@ export default {
     }
   },
   watch: {
-    selectedTechnology: function (){
-        this.search();
-    },
-    selectedCities: function (){
-        this.search();
-    },
-    selectedCategory: function (){
+    selectedTechnology: function () {
       this.search();
     },
-    selectedSeniority: function (){
+    selectedCities: function () {
       this.search();
     },
-    selectedContractType: function (){
+    selectedCategory: function () {
       this.search();
     },
-    minSalary: function (){
+    selectedSeniority: function () {
       this.search();
     },
-    onlyWithSalary: function (){
+    selectedContractType: function () {
       this.search();
     },
-    onlyFromPl: function (){
+    minSalary: function () {
       this.search();
     },
-    selectedWord: function (){
+    onlyWithSalary: function () {
+      this.search();
+    },
+    onlyFromPl: function () {
+      this.search();
+    },
+    selectedWord: function () {
       this.search();
     },
   },
@@ -255,52 +247,39 @@ export default {
 
 .logo {
   a {
-    display: block;
-    color: white;
-    font-weight: bold;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-    text-align: center;
-    background: rgba(0,0,0,0.7);
-    padding: 0.8rem 1.5rem;
-    position: absolute;
-    top: 0;
-    left: 0;
-    text-align: center;
-    width: 100%;
-  }
 
-  a:hover {
-    text-decoration: none;
-  }
+    display: inline-block;
 
-}
-
-.myNavUl {
-  li {
-    width: 100%;
-    text-align: right;
-    font-weight: normal;
-
-    a.active {
-      background: red;
-    }
-
-    a {
-      color: #aab1bb;
-
-      &:hover {
-        color: #e30059;
-      }
+    img {
+      width: 250px;
+      margin-left: -10px;
     }
   }
+
+  span {
+    padding-top: 10px;
+    color: #fff;
+  }
 }
 
-#mainSearcher {
-  width: 100%
+#footerLinks {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.6);
+  a {
+    color: rgba(255,255,255,0.99);
+  }
 }
 
-#searchPanel{}
+#searchPanel {
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: 33%;
+  height: 100%;
+}
 
 .custom-checkbox {
   padding: 0;
