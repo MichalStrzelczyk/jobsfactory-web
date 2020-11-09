@@ -6,9 +6,11 @@
 
 
         <div class="col-12">
-          <h1 class="position pt-2 pb-2">{{ offer.position }} ({{ offer.companyCity}})<SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags></h1>
+          <h1 class="position pt-2 pb-2">{{ offer.position }} ({{ offer.companyCity }})
+            <SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags>
+          </h1>
           <div class="mt-5">
-            {{ offer.minEarnings }} - {{ offer.maxEarnings }} {{ offer.currency }} <br />
+            {{ offer.minEarnings }} - {{ offer.maxEarnings }} {{ offer.currency }} <br/>
             {{ offer.companyName }}, {{ offer.companyAddress }}
           </div>
 
@@ -69,10 +71,14 @@ export default {
   data: function () {
     return {
       offer: null,
-      counter: 6
+      counter: 5
     }
   },
+  created: function () {
+    this.getImage();
+  },
   mounted() {
+
     this.getOfferById(this.$route.params.id);
     setInterval(() => {
       if (this.counter > 0) {
@@ -81,6 +87,27 @@ export default {
     }, 1000);
   },
   methods: {
+
+    startCounting: function () {
+      alert(1);
+    },
+    stopCounting: function () {
+      alert(2);
+    },
+    getImage: function () {
+      var url = 'http://api.jobsfactory.pl/advertisement';
+      axios
+          .get(url)
+          .then(response => {
+            this.setBackgroud(response.data.urlImage);
+          })
+          .catch(error => console.log(error))
+    },
+    setBackgroud: function (url) {
+      document.body.style.backgroundImage = "url('" + url + "')";
+      document.body.style.backgroundPosition = "center";
+      document.body.style.backgroundSize = "cover";
+    },
     countingDown: function () {
       this.counter--;
 
@@ -112,11 +139,6 @@ export default {
 @import "../../../styles/sb-ui-kit-pro/variables/_colors";
 
 
-body {
-  background-image: url("https://images.photowall.com/products/54063.jpg?interior[image]=room02_wallpaper_landscape&interior[type]=photo-wallpaper&primary_area[x]=50.567&primary_area[y]=49.243&w=4000&q=80");
-}
-
-
 .container-fluid {
   padding-left: 0rem;
   padding-right: 0rem;
@@ -124,7 +146,7 @@ body {
 
 .bg-jobsfactory {
   //background-image: linear-gradient(15deg, #311840 10%, rgba(105, 0, 199, .8) 80%);
-  background-color: rgba(255,255,255,0.95);
+  background-color: rgba(255, 255, 255, 0.95);
 }
 
 #boxInfo {

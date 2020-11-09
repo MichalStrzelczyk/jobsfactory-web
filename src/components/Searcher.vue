@@ -34,7 +34,7 @@
           </b-form-group>
 
           <!--   <b-tab title="Miasto" active>-->
-          <h4>Miasto</h4>
+          <h4>Lokalizacja</h4>
           <b-form-group label="">
             <b-form-checkbox-group
                 id="checkbox-group-1"
@@ -43,7 +43,7 @@
                 :options="cityList"
                 name="flavour-1"
             ></b-form-checkbox-group>
-            <b-form-checkbox class="mb-3" v-model="onlyFromPl" name="check-button" switch>
+            <b-form-checkbox  v-model="onlyFromPl" name="check-button" switch>
               <span class="offersOnlyWithMoney">Tylko oferty z Polski</span>
             </b-form-checkbox>
           </b-form-group>
