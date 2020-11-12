@@ -320,10 +320,14 @@ $grey: #687281 !default;
 ul.sorting {
   list-style: none;
   float: right;
+
   li {
     text-align: center;
     float: left;
     padding: 0 .4rem;
+        font-size: 0.9rem;
+
+
     a {
       color: $grey;
     }

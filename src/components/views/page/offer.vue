@@ -2,10 +2,10 @@
   <div class="container-fluid">
 
     <div id="boxInfo" class="bg-jobsfactory">
-      <div class="row">
 
 
-        <div class="col-12">
+
+        <div class="">
           <h1 class="position pt-2 pb-2">{{ offer.position }} ({{ offer.companyCity }})
             <SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags>
           </h1>
@@ -15,7 +15,7 @@
           </div>
 
         </div>
-        <div class="col-12 text-center mt-3">
+        <div class="text-center mt-3">
           <h3>Trwa przekierowanie na portal</h3>
           <div class="sourcePortalLogo mt-3 mb-3">
             <ImagePreloader :imageUrl="'/assets/img/logo/' + offer.sourcePortal + '.png'"
@@ -24,7 +24,7 @@
           <div id="counter">{{ counter }} sek</div>
         </div>
       </div>
-    </div>
+
   </div>
 </template>
 
@@ -87,13 +87,6 @@ export default {
     }, 1000);
   },
   methods: {
-
-    startCounting: function () {
-      alert(1);
-    },
-    stopCounting: function () {
-      alert(2);
-    },
     getImage: function () {
       var url = 'http://api.jobsfactory.pl/advertisement';
       axios
@@ -154,35 +147,10 @@ export default {
   position: fixed;
   top: 1rem;
   left: 1rem;
-  max-width: 30%;
   border-radius: 0.45rem;
   border: 0 solid rgba(0, 0, 0, 0.125);
   background-clip: border-box;
   padding: 1rem;
-
-  .logo {
-    a {
-      background-image: linear-gradient(15deg, #311840 10%, rgba(105, 0, 199, .8) 80%);
-      display: block;
-      color: white;
-      font-weight: bold;
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-      text-align: center;
-
-      padding: 0.8rem 1.5rem;
-      position: absolute;
-      top: 0;
-      left: 0;
-      text-align: center;
-      width: 100%;
-    }
-
-    a:hover {
-      text-decoration: none;
-    }
-
-  }
 
   h1 {
     color: $pink;
@@ -195,7 +163,7 @@ export default {
 
   .sourcePortalLogo {
     img {
-      max-width: 30%;
+      max-width: 60%;
     }
   }
 

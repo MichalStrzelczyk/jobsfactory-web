@@ -24,19 +24,23 @@ export default {
   },
   metaInfo() {
     return {
-      title: "JobsFactory - oferty pracy IT, największy portal z ogłoszeniami IT",
+      title: "JobsFactory - oferty pracy IT, największy portal z ogłoszeniami IT, wyszukiwarka ogłoszeń IT",
       meta: [
         {
           name: 'description',
-          content:  'Największy portal z ofertami pracy dla branży IT. Zebraliśmy dla Ciebie ponad 7000 ofert z wiodących portali na rynku. Nie trać czasu i w łatwy sposób znajdź nową pracę w branży IT'
+          content:  'Największy wyszukiwarka ofert pracy dla branży IT. Zebraliśmy dla Ciebie ponad 7000 ofert z wiodących portali na rynku. Nie trać czasu i w łatwy sposób znajdź nową pracę w branży IT'
         },
         {
           property: 'og:title',
-          content: "JobsFactory - oferty pracy IT"
+          content: "JobsFactory - wyszukiwarka ofert pracy IT"
         },
         {
           property: 'og:site_name',
           content: 'JobsFactory'
+        },
+        {
+          property: 'og:image',
+          content: '/assets/img/logo/jobs_factory_black.jpg'
         },
         {
           property: 'og:type',
