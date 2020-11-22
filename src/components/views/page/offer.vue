@@ -1,23 +1,40 @@
 <template>
   <div class="container-fluid">
-    <div id="boxInfo" class="bg-jobsfactory">
-        <div class="">
-          <h1 class="position pt-2 pb-2">{{ offer.position }} ({{ offer.companyCity }})
-            <SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags>
-          </h1>
-          <div class="mt-5">
-            {{ offer.minEarnings }} - {{ offer.maxEarnings }} {{ offer.currency }} <br/>
-          </div>
+    <div id="boxInfo" class="bg-jobsfactory" v-if="offer">
+      <div class="row">
+        <div class="col-12 text-center text-md-left">
+          <h1> {{ offer.position }} ({{ offer.companyCity }})</h1>
         </div>
-        <div class="text-center mt-3">
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <SmallTags class="d-none d-md-block" :tagsMessage="offer.tags"></SmallTags>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 mt-2 d-none d-md-block">
+          {{ offer.minEarnings }} - {{ offer.maxEarnings }} {{ offer.currency }} <br/>
+        </div>
+      </div>
+      <div class="row text-center mt-3">
+        <div class="col-12">
           <h3>Trwa przekierowanie na portal</h3>
-          <div class="sourcePortalLogo mt-3 mb-3">
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-12">
+          <div class="sourcePortalLogo mt-lg-3 mb-lg-3 mt-2 mb-2">
             <ImagePreloader :imageUrl="'/assets/img/logo/' + offer.sourcePortal + '.png'"
                             :companyName="offer.sourcePortal"></ImagePreloader>
           </div>
+        </div>
+      </div>
+      <div class="row text-center">
+        <div class="col-12">
           <div id="counter">{{ counter }} sek</div>
         </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -64,15 +81,22 @@ export default {
   data: function () {
     return {
       offer: null,
-      counter: 5
+      counter: 5,
+      counterActive: false
     }
   },
   created: function () {
     this.getImage();
+    window.onfocus = () => {
+      this.counterActive = true;
+    };
+    window.onblur = () => {
+      this.counterActive = false;
+    };
   },
   mounted() {
-
     this.getOfferById(this.$route.params.id);
+    this.counterActive = document.hasFocus();
     setInterval(() => {
       if (this.counter > 0) {
         this.countingDown();
@@ -95,18 +119,19 @@ export default {
           })
           .catch(error => console.log(error))
     },
-    setLink: function(redirectUrl){
+    setLink: function (redirectUrl) {
       document.body.style.cursor = 'pointer';
-      document.body.addEventListener('click', function(){
+      document.body.addEventListener('click', function () {
         window.open(redirectUrl);
       }, true);
     },
     setBackground: function (url) {
       document.body.style.backgroundImage = "url('" + url + "')";
-      document.body.style.backgroundPosition = "center top";
-      document.body.style.backgroundSize = "cover";
     },
     countingDown: function () {
+      if (this.counterActive === false) {
+        return;
+      }
       this.counter--;
 
       if (this.counter === 0) {
@@ -134,12 +159,12 @@ export default {
 
 <style lang="scss">
 
-@import "../../../styles/sb-ui-kit-pro/variables/_colors";
+@import "../../../styles/project-variables";
 
 
 .container-fluid {
-  padding-left: 0rem;
-  padding-right: 0rem;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .bg-jobsfactory {
@@ -156,7 +181,8 @@ export default {
   border: 0 solid rgba(0, 0, 0, 0.125);
   background-clip: border-box;
   padding: 1rem;
-  max-width: 25%;
+  max-width: 80vw;
+  width: 500px;
 
   h1 {
     color: $pink;
@@ -177,4 +203,31 @@ export default {
     font-size: 2rem;
   }
 }
+
+@media (max-width: $breakpoint-lg) {
+  #boxInfo {
+    width: 400px;
+
+    h1 {
+      font-size: 1.1rem;
+    }
+
+    .sourcePortalLogo img {
+      height: 30px;
+    }
+
+    #counter {
+      font-size: 1.7rem;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  #boxInfo {
+    margin: 0 10vw;
+
+  }
+}
+
+
 </style>

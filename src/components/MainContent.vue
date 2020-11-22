@@ -1,22 +1,25 @@
 <template>
-  <div class="mt-5">
+  <div class="mt-3 mt-lg-5">
     <div class="row m-0">
-      <div class="col-12 p-0">
+      <div class="col-12 col-md-6 text-lg-left">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
-
-        <ul class="sorting">
+      </div>
+      <div class="col-12 col-md-6">
+        <ul class="sorting justify-content-end mb-0 mt-1 mt-lg-0">
           <li>
-            <a v-on:click.prevent.stop="changeOrder('id_desc')" v-bind:class="{'active' : searchRequirements.orderType == 'id_desc'}" href="">Najnowsze</a>
+            <a v-on:click.prevent.stop="changeOrder('id_desc')"
+               v-bind:class="{'active' : searchRequirements.orderType == 'id_desc'}" href="">Najnowsze</a>
           </li>
           <li>
-            <a v-on:click.prevent.stop="changeOrder('id_asc')" v-bind:class="{'active' : searchRequirements.orderType == 'id_asc'}" href="">Najstarsze </a>
+            <a v-on:click.prevent.stop="changeOrder('id_asc')"
+               v-bind:class="{'active' : searchRequirements.orderType == 'id_asc'}" href="">Najstarsze </a>
           </li>
           <li>
-            <a v-on:click.prevent.stop="changeOrder('maxEarnings_desc')" v-bind:class="{'active' : searchRequirements.orderType == 'maxEarnings_desc'}" href="">Najlepiej płatne</a>
+            <a v-on:click.prevent.stop="changeOrder('maxEarnings_desc')"
+               v-bind:class="{'active' : searchRequirements.orderType == 'maxEarnings_desc'}" href="">Najlepiej
+              płatne</a>
           </li>
         </ul>
-
-
       </div>
     </div>
     <div class="col-lg-12 mt-4">
@@ -28,7 +31,10 @@
           <div class="row">
             <div class="col-lg-4 col-12">
               <span class="position">
-                <router-link target="_blank" @click="navigate" :to="{ name: 'offer', params: { id: offer.id, city: String(offer.companyCity), seoText: createSlug(offer.position) }}">{{ offer.position }}</router-link>
+                <router-link target="_blank"
+                             :to="{ name: 'offer', params: { id: offer.id, city: String(offer.companyCity), seoText: createSlug(offer.position) }}">{{
+                    offer.position
+                  }}</router-link>
               </span> <br/>
               {{ offer.companyName }} <br/>
               <span class="oi oi-location"></span><span class="city"> {{ offer.companyCity }}</span>
@@ -43,7 +49,7 @@
         </div>
       </div>
       <div class="row mt-2 p-3">
-        <div class="col text-xl-center" id="loader" v-bind:class="{ show: showLoader }">
+        <div class="col text-center" id="loader" v-bind:class="{ show: showLoader }">
           <div class="spinner-grow text-warning m-2" role="status"></div>
           <div class="spinner-grow text-warning m-2" role="status"></div>
           <div class="spinner-grow text-warning m-2" role="status"></div>
@@ -100,36 +106,36 @@ export default {
     this.reload([]);
   },
   methods: {
-    changeOrder: function(orderType){
+    changeOrder: function (orderType) {
       this.searchRequirements.orderType = orderType;
       this.reload(this.searchRequirements);
     },
-    createSlug: function(str){
-        str = str.replace(/^\s+|\s+$/g, ""); // trim
-        str = str.toLowerCase();
+    createSlug: function (str) {
+      str = str.replace(/^\s+|\s+$/g, ""); // trim
+      str = str.toLowerCase();
 
-        // remove accents, swap ñ for n, etc
-        var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
-        var to = "aaaaaaeeeeiiiioooouuuunc------";
+      // remove accents, swap ñ for n, etc
+      var from = "åàáãäâèéëêìíïîòóöôùúüûñç·/_,:;";
+      var to = "aaaaaaeeeeiiiioooouuuunc------";
 
-        for (var i = 0, l = from.length; i < l; i++) {
-          str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
-        }
+      for (var i = 0, l = from.length; i < l; i++) {
+        str = str.replace(new RegExp(from.charAt(i), "g"), to.charAt(i));
+      }
 
-        str = str
-            .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
-            .replace(/\s+/g, "-") // collapse whitespace and replace by -
-            .replace(/-+/g, "-") // collapse dashes
-            .replace(/^-+/, "") // trim - from start of text
-            .replace(/-+$/, ""); // trim - from end of text
+      str = str
+          .replace(/[^a-z0-9 -]/g, "") // remove invalid chars
+          .replace(/\s+/g, "-") // collapse whitespace and replace by -
+          .replace(/-+/g, "-") // collapse dashes
+          .replace(/^-+/, "") // trim - from start of text
+          .replace(/-+$/, ""); // trim - from end of text
 
-        return str;
+      return str;
     },
     changeSearchPanelStatus: function (isHide) {
       this.isPanelHide = isHide;
     },
     more: function () {
-      if(this.activePage< this.pages){
+      if (this.activePage < this.pages) {
         this.activePage++;
         this.getOffers();
       }
@@ -200,10 +206,16 @@ export default {
         this.selectedTags.push('pensja >= ' + this.searchRequirements.minSalary);
       }
 
-      switch (this.searchRequirements.orderType){
-        case 'id_desc': url += '&orderBy=id&orderType=DESC'; break;
-        case 'id_asc': url += '&orderBy=id&orderType=ASC'; break;
-        case 'maxEarnings_desc': url += '&orderBy=maxEarnings&orderType=DESC'; break;
+      switch (this.searchRequirements.orderType) {
+        case 'id_desc':
+          url += '&orderBy=id&orderType=DESC';
+          break;
+        case 'id_asc':
+          url += '&orderBy=id&orderType=ASC';
+          break;
+        case 'maxEarnings_desc':
+          url += '&orderBy=maxEarnings&orderType=DESC';
+          break;
       }
 
       var that = this;
@@ -319,14 +331,16 @@ $grey: #687281 !default;
 
 ul.sorting {
   list-style: none;
-  float: right;
+  display: flex;
+  padding-left: 0;
 
   li {
-    text-align: center;
-    float: left;
     padding: 0 .4rem;
-        font-size: 0.9rem;
+    font-size: 0.9rem;
 
+    &:first-child{
+      padding-left: 0;
+    }
 
     a {
       color: $grey;
@@ -337,7 +351,6 @@ ul.sorting {
     }
   }
 }
-
 
 @media (max-width: $breakpoint-lg) {
   .container-lg {

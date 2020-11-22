@@ -1,8 +1,62 @@
+@import 'node_modules/bootstrap/scss/bootstrap.scss';
+@import 'node_modules/bootstrap-vue/src/index.scss';
+@import "../styles/project-variables";
 
-@import './sb-ui-kit-pro/styles.scss';
 
-@import 'bootstrap-vue/src/index.scss';
+@font-face {
+  font-family: Metropolis;
+  src: url(~@/assets/fonts/metropolis.regular.otf);
+  font-weight: normal;
+}
 
-@import './sb-ui-kit-pro-vue.scss';
-@import './project-variables';
-@import './project-global';
+@font-face {
+  font-family: Metropolis;
+  src: url(~@/assets/fonts/metropolis.medium.otf);
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url(~@/assets/fonts/metropolis.bold.otf);
+  font-weight: bold;
+}
+
+body {
+  margin: 0;
+  font-family: Metropolis,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #687281;
+  text-align: left;
+  background-color: #fff;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: cover;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100vw;
+    height: 100vh;
+    background-size: contain;
+    background-position: center 200px;
+    background-repeat: no-repeat;
+  }
+}
+
+.btn-teal {
+  color: #fff;
+  background-color: #009476;
+  border-color: #00876b;
+  font-weight: 700;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  font-size: .7rem;
+  padding: .8rem 1.5rem;
+  transform: translateY(0);
+  transition: 0.3s transform;
+  &:hover {
+    transform: translateY(-.33333rem);
+    color: white;
+    box-shadow: 0 0.5rem 2rem 0 rgba(31,45,65,.25);
+  }
+}

@@ -14,7 +14,7 @@ export default {
       this.show = false;
     }
   },
-  name: 'Image',
+  name: 'ImagePreloader',
   props: {
     imageUrl: {
       type: String

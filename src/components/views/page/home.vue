@@ -1,10 +1,10 @@
 <template>
   <div class="container-fluid p-0">
     <div class="row m-0">
-      <div id="leftPanel"  class="col-12 col-md-5 col-lg-4">
-          <Searcher></Searcher>
+      <div id="leftPanel" class="col-12 col-lg-4 p-0 p-lg-3">
+        <Searcher></Searcher>
       </div>
-      <div id="rightPanel" class="col-12 col-md-7 col-lg-8">
+      <div id="rightPanel" class="col-12 col-lg-8">
         <MainContent></MainContent>
       </div>
     </div>
@@ -28,7 +28,7 @@ export default {
       meta: [
         {
           name: 'description',
-          content:  'Największy wyszukiwarka ofert pracy dla branży IT. Zebraliśmy dla Ciebie ponad 7000 ofert z wiodących portali na rynku. Nie trać czasu i w łatwy sposób znajdź nową pracę w branży IT'
+          content: 'Największy wyszukiwarka ofert pracy dla branży IT. Zebraliśmy dla Ciebie ponad 7000 ofert z wiodących portali na rynku. Nie trać czasu i w łatwy sposób znajdź nową pracę w branży IT'
         },
         {
           property: 'og:title',
@@ -57,6 +57,7 @@ export default {
 </script>
 
 <style lang="scss">
+@import "../../../styles/project-variables";
 
 .bg-jobsfactory-header {
   background: rgba(6, 4, 8, 0.95);
@@ -67,4 +68,9 @@ export default {
   background-image: linear-gradient(15deg, #311840 10%, rgba(105, 0, 199, .95) 80%);
 }
 
+@media (max-width: $breakpoint-lg) {
+  #rightPanel {
+    font-size: 14px;
+  }
+}
 </style>

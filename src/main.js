@@ -3,7 +3,6 @@ import VueRouter from 'vue-router';
 import App from './app.vue'
 import VueMeta from 'vue-meta'
 
-
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
 import './styles/styles.scss';
 
