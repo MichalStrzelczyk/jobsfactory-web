@@ -28,7 +28,7 @@
           <div class="row">
             <div class="col-lg-4 col-12">
               <span class="position">
-                <router-link target="_blank" @click="navigate" :to="{ name: 'offer', params: { id: offer.id, city: offer.companyCity, seoText: createSlug(offer.position) }}">{{ offer.position }}</router-link>
+                <router-link target="_blank" @click="navigate" :to="{ name: 'offer', params: { id: offer.id, city: String(offer.companyCity), seoText: createSlug(offer.position) }}">{{ offer.position }}</router-link>
               </span> <br/>
               {{ offer.companyName }} <br/>
               <span class="oi oi-location"></span><span class="city"> {{ offer.companyCity }}</span>

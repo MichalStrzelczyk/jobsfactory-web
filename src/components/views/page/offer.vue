@@ -1,19 +1,13 @@
 <template>
   <div class="container-fluid">
-
     <div id="boxInfo" class="bg-jobsfactory">
-
-
-
         <div class="">
           <h1 class="position pt-2 pb-2">{{ offer.position }} ({{ offer.companyCity }})
             <SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags>
           </h1>
           <div class="mt-5">
             {{ offer.minEarnings }} - {{ offer.maxEarnings }} {{ offer.currency }} <br/>
-            {{ offer.companyName }}, {{ offer.companyAddress }}
           </div>
-
         </div>
         <div class="text-center mt-3">
           <h3>Trwa przekierowanie na portal</h3>
@@ -24,7 +18,6 @@
           <div id="counter">{{ counter }} sek</div>
         </div>
       </div>
-
   </div>
 </template>
 
@@ -92,13 +85,25 @@ export default {
       axios
           .get(url)
           .then(response => {
-            this.setBackgroud(response.data.urlImage);
+            this.setLink(response.data.actionLink);
+            // is mobile
+            if (window.innerWidth < 550) {
+              this.setBackground(response.data.urlMobileImage);
+            } else {
+              this.setBackground(response.data.urlImage);
+            }
           })
           .catch(error => console.log(error))
     },
-    setBackgroud: function (url) {
+    setLink: function(redirectUrl){
+      document.body.style.cursor = 'pointer';
+      document.body.addEventListener('click', function(){
+        window.open(redirectUrl);
+      }, true);
+    },
+    setBackground: function (url) {
       document.body.style.backgroundImage = "url('" + url + "')";
-      document.body.style.backgroundPosition = "center";
+      document.body.style.backgroundPosition = "center top";
       document.body.style.backgroundSize = "cover";
     },
     countingDown: function () {
@@ -151,6 +156,7 @@ export default {
   border: 0 solid rgba(0, 0, 0, 0.125);
   background-clip: border-box;
   padding: 1rem;
+  max-width: 25%;
 
   h1 {
     color: $pink;
