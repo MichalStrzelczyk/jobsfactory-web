@@ -1,11 +1,11 @@
 <template>
   <div class="mt-3 mt-lg-5">
     <div class="row m-0">
-      <div class="col-12 col-md-6 text-lg-left">
+      <div class="col-12 col-md-6 text-md-left text-center">
         Znaleziono: <strong>{{ allOffersCount }}</strong> ofert.
       </div>
       <div class="col-12 col-md-6">
-        <ul class="sorting justify-content-end mb-0 mt-1 mt-lg-0">
+        <ul class="sorting justify-content-center justify-content-md-end mb-0 mt-1 mt-lg-0">
           <li>
             <a v-on:click.prevent.stop="changeOrder('id_desc')"
                v-bind:class="{'active' : searchRequirements.orderType == 'id_desc'}" href="">Najnowsze</a>

@@ -207,6 +207,8 @@ export default {
 @media (max-width: $breakpoint-lg) {
   #boxInfo {
     width: 400px;
+    left: 0;
+    right: 0;
 
     h1 {
       font-size: 1.1rem;

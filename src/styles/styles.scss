@@ -7,18 +7,14 @@
   font-family: Metropolis;
   src: url(~@/assets/fonts/metropolis.regular.otf);
   font-weight: normal;
-}
-
-@font-face {
-  font-family: Metropolis;
-  src: url(~@/assets/fonts/metropolis.medium.otf);
-  font-weight: 500;
+  font-display:swap;
 }
 
 @font-face {
   font-family: Metropolis;
   src: url(~@/assets/fonts/metropolis.bold.otf);
   font-weight: bold;
+  font-display:swap;
 }
 
 body {
@@ -33,10 +29,9 @@ body {
   background-repeat: no-repeat;
   background-position: top center;
   background-size: cover;
+  min-height: 100vh;
 
   @media (max-width: $breakpoint-md) {
-    width: 100vw;
-    height: 100vh;
     background-size: contain;
     background-position: center 200px;
     background-repeat: no-repeat;

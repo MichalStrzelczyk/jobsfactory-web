@@ -1,7 +1,7 @@
 <template>
   <div class="w-100">
     <div class="header-mobile bg-jobsfactory d-block d-lg-none">
-      <div class="logo px-3">
+      <div class="logo px-3 text-center text-lg-left">
         <a href="/" title="Portal z ogłoszeniami pracy dla IT">
           <img src="/assets/img/logo/jobs_factory_white.svg"/>
         </a>
@@ -411,8 +411,9 @@ export default {
     .logo {
       a {
         img {
-          height: 30px;
+          height: 60px;
           width: auto;
+          padding: 10px
         }
       }
     }
