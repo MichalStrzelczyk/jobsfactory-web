@@ -151,7 +151,7 @@ export default {
       this.showLoader = true;
       var limit = this.perPage;
       var offset = this.perPage * (this.activePage - 1);
-      var url = 'http://api.jobsfactory.pl?limit=' + limit + '&offset=' + offset;
+      var url = 'https://api.jobsfactory.pl?limit=' + limit + '&offset=' + offset;
 
       if (this.searchRequirements.onlyWithSalary) {
         url += '&onlyWithSalary=1';

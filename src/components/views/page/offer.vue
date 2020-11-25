@@ -105,7 +105,7 @@ export default {
   },
   methods: {
     getImage: function () {
-      var url = 'http://api.jobsfactory.pl/advertisement';
+      var url = 'https://api.jobsfactory.pl/advertisement';
       axios
           .get(url)
           .then(response => {
@@ -139,7 +139,7 @@ export default {
       }
     },
     getOfferById: function (offerId) {
-      var url = 'http://api.jobsfactory.pl?id=' + offerId;
+      var url = 'https://api.jobsfactory.pl?id=' + offerId;
       axios
           .get(url)
           .then(response => {
