@@ -52,7 +52,7 @@
       <div class="row align-items-center">
         <div class="col-md-6 small">Copyright © DigitalFarm 2020</div>
         <div class="col-md-6 text-md-right small">
-          <a href="">Polityka prywatności</a> | <a href="">Regulamin</a>
+          <a href="">Regulamin</a>
         </div>
       </div>
     </div>

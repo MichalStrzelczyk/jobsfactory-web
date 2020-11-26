@@ -114,8 +114,7 @@
           </div>
           <div class="col-12">
             <div id="footerLinks" class="mt-3 pb-3">
-              Copyright JobsFactory.pl 2020 | <a target="_blank" href="/assets/pdf/regulamin.pdf">Regulamin</a> | <a
-                target="_blank" href="/assets/pdf/polityka_prywatnosci.pdf">Polityka prywatności</a>
+              Copyright JobsFactory.pl 2020 | <a target="_blank" href="/assets/pdf/regulamin.pdf">Regulamin</a>
             </div>
           </div>
         </div>
