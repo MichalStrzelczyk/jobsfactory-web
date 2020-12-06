@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router';
 import App from './app.vue'
 import VueMeta from 'vue-meta'
+import VueAnalytics from 'vue-analytics'
+
 
 import {BootstrapVue, IconsPlugin} from 'bootstrap-vue';
 import './styles/styles.scss';
@@ -12,6 +14,7 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueMeta)
 Vue.use(VueRouter);
+
 const routes = [
     {
         path: '/',
@@ -24,9 +27,16 @@ const routes = [
         component: () => import('./components/views/page/offer.vue'),
     }
 ];
+
 const router = new VueRouter({
     routes // short for `routes: routes`
 })
+
+Vue.use(VueAnalytics, {
+    id: 'UA-184653748-1',
+    router
+})
+
 
 new Vue({
     router,

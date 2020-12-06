@@ -104,12 +104,18 @@ export default {
     }, 1000);
   },
   methods: {
+    track() {
+      this.$ga.page(window.location.pathname);
+    },
     getImage: function () {
       var url = 'https://api.jobsfactory.pl/advertisement';
       axios
           .get(url)
           .then(response => {
-            this.setLink(response.data.actionLink);
+            if (response.data.actionLink.length > 1) {
+              this.setLink(response.data.actionLink);
+            }
+
             // is mobile
             if (window.innerWidth < 550) {
               this.setBackground(response.data.urlMobileImage);

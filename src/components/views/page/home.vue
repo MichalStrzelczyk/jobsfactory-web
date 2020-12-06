@@ -22,6 +22,11 @@ export default {
     Searcher,
     MainContent
   },
+  methods: {
+      track () {
+        this.$ga.page('/')
+      }
+  },
   metaInfo() {
     return {
       title: "JobsFactory - oferty pracy IT, największy portal z ogłoszeniami IT, wyszukiwarka ogłoszeń IT",

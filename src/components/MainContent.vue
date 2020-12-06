@@ -41,6 +41,11 @@
             </div>
             <div class="col-lg-3 col-12">
               <span class="money">{{ offer.minEarnings }} - {{ offer.maxEarnings }} {{ offer.currency }} </span>
+
+              <div v-if="offer.currency != 'PLN' && offer.minEarnings">
+                <span class="moneyPLN">({{ offer.minEarningsInPLN }} - {{ offer.maxEarningsInPLN }} PLN)</span>
+              </div>
+
             </div>
             <div class="col-lg-5 col-12">
               <SmallTags class="mt-2" :tagsMessage="offer.tags"></SmallTags>
@@ -305,6 +310,11 @@ $grey: #687281 !default;
   .money {
     color: black;
     font-size: 0.9rem;
+  }
+
+  .moneyPLN {
+    color: $grey;
+    font-size: 0.8rem;
   }
 
 
